@@ -1,49 +1,22 @@
 # Guia de uso
 
-DataType de caminho de arquivo para aplicacoes Elavora API.
-
-## Instalacao
-
-```bash
-composer require elavora/api-datatype-file-path
-```
-
-## Quando usar
-
-- Validar e normalizar valores antes de chegar na regra de negocio.
-- Evitar passar strings soltas entre services, DTOs e persistencia.
-- Reutilizar a mesma validacao em controllers, comandos e testes.
-
-## Exemplo rapido
+`FilePath` aceita caminhos relativos separados por `/`. O ultimo segmento deve ser um `FileName` valido; os anteriores devem ser `FolderName` validos.
 
 ```php
 use Elavora\Api\DataTypes\Filesystem\FilePath;
 
-$valor = new FilePath('exemplo');
-$normalizado = $valor->value();
+$filePath = FilePath::from('avatars/user.png');
+
+echo $filePath->value(); // avatars/user.png
 ```
 
-## Principais pontos de entrada
+Caminhos absolutos, segmentos vazios, `.` e `..` sao rejeitados. As restricoes de portabilidade dos nomes de arquivo e pasta tambem se aplicam a cada segmento.
 
-- `Elavora\Api\DataTypes\Filesystem\FilePath`
+## Validacao do pacote
 
-## Dependencias de runtime
-
-- `elavora/api-datatype-core` `^0.1`
-- `elavora/api-datatype-file-name` `^0.1`
-- `elavora/api-datatype-folder-name` `^0.1`
-
-## Validacao no projeto consumidor
-
-Depois de instalar o pacote, rode os testes da aplicacao consumidora. Para uma verificacao isolada do pacote, use container:
+Execute os comandos a partir da raiz do clone:
 
 ```bash
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-file-path" composer:2 composer validate --strict --no-check-publish
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-file-path" composer:2 sh -lc "find . \\( -path ./.git -o -path ./vendor \\) -prune -o -name '*.php' -print0 | xargs -0 -r -n1 php -l"
+docker run --rm -v "${PWD}:/workspace" -w /workspace composer:2 composer update --no-interaction --no-progress --prefer-dist
+docker run --rm -v "${PWD}:/workspace" -w /workspace composer:2 composer check
 ```
-
-## Observacoes
-
-- Mantenha regras de produto fora deste pacote.
-- Prefira configurar extensoes no bootstrap da aplicacao.
-- Instale apenas os modulos que a aplicacao realmente usa.
