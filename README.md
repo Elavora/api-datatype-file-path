@@ -1,1 +1,85 @@
-# api-datatype-file-path
+# elavora/api-datatype-file-path
+
+[![Packagist Version](https://img.shields.io/packagist/v/elavora/api-datatype-file-path.svg?style=flat-square)](https://packagist.org/packages/elavora/api-datatype-file-path)
+[![PHP Version](https://img.shields.io/packagist/php-v/elavora/api-datatype-file-path.svg?style=flat-square)](https://packagist.org/packages/elavora/api-datatype-file-path)
+[![Qualidade](https://github.com/Elavora/api-datatype-file-path/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/Elavora/api-datatype-file-path/actions/workflows/quality.yml)
+[![CodeQL](https://github.com/Elavora/api-datatype-file-path/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Elavora/api-datatype-file-path/actions/workflows/codeql.yml)
+[![License](https://img.shields.io/packagist/l/elavora/api-datatype-file-path.svg?style=flat-square)](LICENSE)
+
+DataType de caminho de arquivo para aplicações Elavora API.
+
+```php
+use Elavora\Api\DataTypes\Filesystem\FilePath;
+
+$valor = FilePath::from('avatars/user.png');
+$normalizado = $valor->value();
+```
+
+Guia de uso, com a API pública e exemplos: [docs/USO.md](docs/USO.md).
+
+## Instalação
+
+```bash
+composer require elavora/api-datatype-file-path
+```
+
+Requisitos: PHP 8.3 ou superior, `elavora/api-datatype-core` `^2.0` (que usa o `elavora/api-framework` `^2.0`),
+`elavora/api-datatype-file-name` `^1.0` e `elavora/api-datatype-folder-name` `^1.0`.
+
+## Desenvolvimento e testes
+
+Você só precisa de Docker. O ambiente é a imagem `ghcr.io/elavora/php-dev:8.3-latest`: abra o repositório no VS Code
+com **Dev Containers: Reopen in Container**, ou rode no PowerShell:
+
+```powershell
+docker run --rm --mount "type=bind,source=$($PWD.Path),target=/workspace" -w /workspace ghcr.io/elavora/php-dev:8.3-latest sh -lc 'git config --global --add safe.directory /workspace && composer install --no-interaction --prefer-dist && composer check'
+```
+
+Scripts do Composer:
+
+```bash
+composer check     # lint, testes e PHPStan
+composer test      # testes PHPUnit
+composer lint      # sintaxe (elavora-standards lint)
+composer analyse   # PHPStan, nível 8
+```
+
+O código segue o padrão PER-CS, com as regras do pacote `elavora/code-standards`. No devcontainer, o arquivo é
+formatado ao salvar; no PR, o CI formata o que faltou e commita a correção (`style: organiza o código`).
+Os testes rodam no CI, no workflow **Qualidade**, em todo PR. O passo a passo, o que roda no CI e como reproduzi-lo
+estão em [Desenvolvimento e testes](docs/DESENVOLVIMENTO.md).
+
+## Como contribuir
+
+1. Crie uma branch a partir da `main` (`feat/...`, `fix/...` ou `docs/...`).
+2. Faça commits em português do Brasil, no padrão Conventional Commits (`feat: ...`, `fix: ...`, `docs: ...`).
+3. Rode `composer check` antes de abrir o PR.
+4. Abra o PR para a `main`, preencha o template e aplique as labels que definem a versão
+   ([Versões e release](docs/AUTOMACAO.md#versões-e-release)).
+5. Confira o comentário do pipeline de qualidade no PR. Ele não bloqueia o merge, mas quem revisa olha o resultado.
+
+## Versões
+
+Versão `1.0.0`: atualiza o pacote para o `elavora/api-datatype-core` `^2.0` e os pacotes
+`elavora/api-datatype-file-name` e `elavora/api-datatype-folder-name` `^1.0`, e exige PHP 8.3 ou superior (antes:
+PHP 8.1 e `^0.1` nos três). O core `^0.1` não funciona mais com o framework atual, por isso a restrição antiga deixa
+de ser aceita. A versão traz duas quebras, que valem para os datatypes `1.0`:
+
+- o construtor de `FilePath` deixa de ser público: a criação é só por `FilePath::from(...)`;
+- valor inválido lança `InvalidArgumentException` com a mensagem `Valor invalido para <classe>.`
+
+Os detalhes e a migração estão no [Guia de uso](docs/USO.md#atualizacao-da-versao-anterior).
+
+Cada PR integrado na `main` gera uma versão automaticamente, conforme as labels do PR: sem a label `release` sai uma
+beta (`1.1.0-beta.1`), com ela sai a estável (`1.1.0`). As tags novas não têm o prefixo `v`, e as notas de cada
+GitHub Release são geradas em português a partir dos PRs. Veja [Versões e release](docs/AUTOMACAO.md#versões-e-release).
+
+## Documentação
+
+1. [Guia de uso](docs/USO.md): a API pública e exemplos.
+2. [Desenvolvimento e testes](docs/DESENVOLVIMENTO.md): ambiente, como rodar os testes e o que roda no CI.
+3. [Automação do repositório](docs/AUTOMACAO.md): workflows, Dependabot, estilo de código, labels e versões.
+
+## Licença
+
+MIT
