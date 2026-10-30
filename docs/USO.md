@@ -35,12 +35,11 @@ $normalizado = $valor->value();
 
 ## Validacao no projeto consumidor
 
-Depois de instalar o pacote, rode os testes da aplicacao consumidora. Para uma verificacao isolada do pacote, use container:
+Depois de instalar o pacote, rode os testes da aplicacao consumidora.
 
-```bash
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-file-path" composer:2 composer validate --strict --no-check-publish
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-file-path" composer:2 sh -lc "find . \\( -path ./.git -o -path ./vendor \\) -prune -o -name '*.php' -print0 | xargs -0 -r -n1 php -l"
-```
+Para validar o pacote isoladamente (testes, lint e PHPStan, e como reproduzir o CI), veja
+[Desenvolvimento e testes](DESENVOLVIMENTO.md). A automacao, as versoes e os arquivos de qualidade do repositorio estao em
+[Automacao do repositorio](AUTOMACAO.md).
 
 ## Observacoes
 
