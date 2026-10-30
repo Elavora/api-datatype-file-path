@@ -11,7 +11,7 @@ DataType de caminho de arquivo para aplicações Elavora API.
 ```php
 use Elavora\Api\DataTypes\Filesystem\FilePath;
 
-$valor = new FilePath('avatars/user.png');
+$valor = FilePath::from('avatars/user.png');
 $normalizado = $valor->value();
 ```
 
@@ -23,8 +23,8 @@ Guia de uso, com a API pública e exemplos: [docs/USO.md](docs/USO.md).
 composer require elavora/api-datatype-file-path
 ```
 
-Requisitos: PHP 8.1 ou superior, `elavora/api-datatype-core` `^0.1`, `elavora/api-datatype-file-name` `^0.1`
-e `elavora/api-datatype-folder-name` `^0.1`.
+Requisitos: PHP 8.3 ou superior, `elavora/api-datatype-core` `^2.0` (que usa o `elavora/api-framework` `^2.0`),
+`elavora/api-datatype-file-name` `^1.0` e `elavora/api-datatype-folder-name` `^1.0`.
 
 ## Desenvolvimento e testes
 
@@ -59,6 +59,16 @@ estão em [Desenvolvimento e testes](docs/DESENVOLVIMENTO.md).
 5. Confira o comentário do pipeline de qualidade no PR. Ele não bloqueia o merge, mas quem revisa olha o resultado.
 
 ## Versões
+
+Versão `1.0.0`: atualiza o pacote para o `elavora/api-datatype-core` `^2.0` e os pacotes
+`elavora/api-datatype-file-name` e `elavora/api-datatype-folder-name` `^1.0`, e exige PHP 8.3 ou superior (antes:
+PHP 8.1 e `^0.1` nos três). O core `^0.1` não funciona mais com o framework atual, por isso a restrição antiga deixa
+de ser aceita. A versão traz duas quebras, que valem para os datatypes `1.0`:
+
+- o construtor de `FilePath` deixa de ser público: a criação é só por `FilePath::from(...)`;
+- valor inválido lança `InvalidArgumentException` com a mensagem `Valor invalido para <classe>.`
+
+Os detalhes e a migração estão no [Guia de uso](docs/USO.md#atualizacao-da-versao-anterior).
 
 Cada PR integrado na `main` gera uma versão automaticamente, conforme as labels do PR: sem a label `release` sai uma
 beta (`1.1.0-beta.1`), com ela sai a estável (`1.1.0`). As tags novas não têm o prefixo `v`, e as notas de cada
