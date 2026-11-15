@@ -85,12 +85,12 @@ test.describe('composer.json', () => {
         assert.ok(!raw.split('\n').some((l) => /^ {4}"require"/.test(l)), 'indentação de 4 espaços encontrada');
     });
 
-    test('require tem php >=8.3, elavora/api-datatype-core ^2.0, file-name ^1.0 e folder-name ^1.0', () => {
+    test('require tem php >=8.3, elavora/api-datatype-core ^3.0, file-name ^2.0 e folder-name ^2.0', () => {
         const c = composer();
         assert.equal((c.require || {}).php, '>=8.3');
-        assert.equal((c.require || {})['elavora/api-datatype-core'], '^2.0', 'dependência de runtime deveria ser ^2.0');
-        assert.equal((c.require || {})['elavora/api-datatype-file-name'], '^1.0', 'dependência de runtime deveria ser ^1.0');
-        assert.equal((c.require || {})['elavora/api-datatype-folder-name'], '^1.0', 'dependência de runtime deveria ser ^1.0');
+        assert.equal((c.require || {})['elavora/api-datatype-core'], '^3.0', 'dependência de runtime deveria ser ^3.0');
+        assert.equal((c.require || {})['elavora/api-datatype-file-name'], '^2.0', 'dependência de runtime deveria ser ^2.0');
+        assert.equal((c.require || {})['elavora/api-datatype-folder-name'], '^2.0', 'dependência de runtime deveria ser ^2.0');
     });
 
     test('elavora/code-standards ^1.N (N >= 1) em require-dev, fora do require', () => {

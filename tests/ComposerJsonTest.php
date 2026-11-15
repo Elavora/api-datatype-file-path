@@ -33,22 +33,22 @@ final class ComposerJsonTest extends TestCase
 
     public function testRequiresDatatypeCore2(): void
     {
-        self::assertSame('^2.0', $this->composer['require']['elavora/api-datatype-core'] ?? null);
+        self::assertSame('^3.0', $this->composer['require']['elavora/api-datatype-core'] ?? null);
     }
 
     public function testRequiresDatatypeFileName1(): void
     {
-        self::assertSame('^1.0', $this->composer['require']['elavora/api-datatype-file-name'] ?? null);
+        self::assertSame('^2.0', $this->composer['require']['elavora/api-datatype-file-name'] ?? null);
     }
 
     public function testRequiresDatatypeFolderName1(): void
     {
-        self::assertSame('^1.0', $this->composer['require']['elavora/api-datatype-folder-name'] ?? null);
+        self::assertSame('^2.0', $this->composer['require']['elavora/api-datatype-folder-name'] ?? null);
     }
 
     public function testBranchAliasIs10Dev(): void
     {
-        self::assertSame('1.0-dev', $this->composer['extra']['branch-alias']['dev-main'] ?? null);
+        self::assertSame('2.0-dev', $this->composer['extra']['branch-alias']['dev-main'] ?? null);
     }
 
     public function testAutoloadIsUnchanged(): void

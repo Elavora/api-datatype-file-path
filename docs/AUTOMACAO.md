@@ -456,7 +456,7 @@ dependências de `require`, `autoload`, `extra.branch-alias`) continuam como est
   para `1.0-dev`, a série da versão que este PR gera.
 - O upgrade traz duas quebras, que valem para todos os datatypes `1.0` e estão em
   [Guia de uso](USO.md#atualizacao-da-versao-anterior): o construtor deixa de ser público (a criação é só por
-  `FilePath::from(...)`) e valor inválido lança `InvalidArgumentException` com a mensagem
+  `new FilePath(...)`) e valor inválido lança `InvalidArgumentException` com a mensagem
   `Valor invalido para <classe>.`
 
 - `elavora/code-standards` fica em `require-dev`, nunca em `require`. A restrição é `^1.` seguido do minor (1 ou

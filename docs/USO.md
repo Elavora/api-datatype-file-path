@@ -19,7 +19,7 @@ composer require elavora/api-datatype-file-path
 ```php
 use Elavora\Api\DataTypes\Filesystem\FilePath;
 
-$valor = FilePath::from('avatars/user.png');
+$valor = new FilePath('avatars/user.png');
 $normalizado = $valor->value(); // 'avatars/user.png'
 ```
 
@@ -31,7 +31,7 @@ com `from()`.
 
 | Metodo | Retorno | O que faz |
 | --- | --- | --- |
-| `FilePath::from(mixed $value)` | `FilePath` | valida e cria o objeto; lanca `InvalidArgumentException` se o valor for invalido |
+| `new FilePath(mixed $value)` | `FilePath` | valida e cria o objeto; lanca `InvalidArgumentException` se o valor for invalido |
 | `FilePath::isValid(mixed $value)` | `bool` | diz se o valor e um caminho de arquivo valido; nunca lanca excecao |
 | `value()` | `string` | o caminho, exatamente como foi informado |
 | `jsonSerialize()` | `string` | o mesmo valor de `value()` |
@@ -79,7 +79,7 @@ A mensagem da excecao e `Valor invalido para Elavora\Api\DataTypes\Filesystem\Fi
 ## Dependencias de runtime
 
 - PHP 8.3 ou superior
-- `elavora/api-datatype-core` `^2.0` (que exige o `elavora/api-framework` `^2.0`)
+- `elavora/api-datatype-core` `^3.0` (que exige o `elavora/api-framework` `^3.0`)
 - `elavora/api-datatype-file-name` `^1.0`
 - `elavora/api-datatype-folder-name` `^1.0`
 
@@ -91,8 +91,8 @@ folder-name `^0.1`, que nao funcionam mais com o framework atual.
 
 Quebras desta versao, que valem para os datatypes `1.0`:
 
-- **O construtor nao e mais publico.** Crie o objeto so com `FilePath::from(...)`. Trocar `new FilePath('a/b.txt')` por
-  `FilePath::from('a/b.txt')`. Chamar `new FilePath(...)` fora da classe lanca `Error` do PHP.
+- **O construtor nao e mais publico.** Crie o objeto so com `new FilePath(...)`. Trocar `new FilePath('a/b.txt')` por
+  `new FilePath('a/b.txt')`. Chamar `new FilePath(...)` fora da classe lanca `Error` do PHP.
 - **Valor invalido lanca `InvalidArgumentException`** com a mensagem
   `Valor invalido para Elavora\Api\DataTypes\Filesystem\FilePath.` Quem capturava a excecao ou comparava a mensagem
   anterior precisa se ajustar.
