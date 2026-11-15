@@ -11,7 +11,7 @@ DataType de caminho de arquivo para aplicações Elavora API.
 ```php
 use Elavora\Api\DataTypes\Filesystem\FilePath;
 
-$valor = FilePath::from('avatars/user.png');
+$valor = new FilePath('avatars/user.png');
 $normalizado = $valor->value();
 ```
 
@@ -23,7 +23,7 @@ Guia de uso, com a API pública e exemplos: [docs/USO.md](docs/USO.md).
 composer require elavora/api-datatype-file-path
 ```
 
-Requisitos: PHP 8.3 ou superior, `elavora/api-datatype-core` `^2.0` (que usa o `elavora/api-framework` `^2.0`),
+Requisitos: PHP 8.3 ou superior, `elavora/api-datatype-core` `^3.0` (que usa o `elavora/api-framework` `^3.0`),
 `elavora/api-datatype-file-name` `^1.0` e `elavora/api-datatype-folder-name` `^1.0`.
 
 ## Desenvolvimento e testes
@@ -65,7 +65,7 @@ Versão `1.0.0`: atualiza o pacote para o `elavora/api-datatype-core` `^2.0` e o
 PHP 8.1 e `^0.1` nos três). O core `^0.1` não funciona mais com o framework atual, por isso a restrição antiga deixa
 de ser aceita. A versão traz duas quebras, que valem para os datatypes `1.0`:
 
-- o construtor de `FilePath` deixa de ser público: a criação é só por `FilePath::from(...)`;
+- o construtor de `FilePath` deixa de ser público: a criação é só por `new FilePath(...)`;
 - valor inválido lança `InvalidArgumentException` com a mensagem `Valor invalido para <classe>.`
 
 Os detalhes e a migração estão no [Guia de uso](docs/USO.md#atualizacao-da-versao-anterior).

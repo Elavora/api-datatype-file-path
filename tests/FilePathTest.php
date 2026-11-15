@@ -58,7 +58,7 @@ final class FilePathTest extends TestCase
     #[DataProvider('validPaths')]
     public function testFromKeepsValueExactly(string $path): void
     {
-        $filePath = FilePath::from($path);
+        $filePath = new FilePath($path);
 
         self::assertSame($path, $filePath->value());
         self::assertSame($path, $filePath->jsonSerialize());
@@ -78,12 +78,12 @@ final class FilePathTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Valor invalido para Elavora\Api\DataTypes\Filesystem\FilePath.');
 
-        FilePath::from($path);
+        new FilePath($path);
     }
 
     public function testNoNormalization(): void
     {
-        self::assertSame(' Avatars/User.PNG ', FilePath::from(' Avatars/User.PNG ')->value());
+        self::assertSame(' Avatars/User.PNG ', new FilePath(' Avatars/User.PNG ')->value());
     }
 
     public function testConstructorIsNotPublic(): void
