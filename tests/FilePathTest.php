@@ -86,10 +86,11 @@ final class FilePathTest extends TestCase
         self::assertSame(' Avatars/User.PNG ', (new FilePath(' Avatars/User.PNG '))->value());
     }
 
-    public function testConstructorIsNotPublic(): void
+    public function testConstructorIsPublic(): void
     {
-        $this->expectException(\Error::class);
+        $constructor = (new \ReflectionClass(FilePath::class))->getConstructor();
 
-        new FilePath('a/b.txt'); // @phpstan-ignore-line
+        self::assertNotNull($constructor);
+        self::assertTrue($constructor->isPublic());
     }
 }
