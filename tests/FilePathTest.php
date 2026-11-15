@@ -83,7 +83,7 @@ final class FilePathTest extends TestCase
 
     public function testNoNormalization(): void
     {
-        self::assertSame(' Avatars/User.PNG ', new FilePath(' Avatars/User.PNG ')->value());
+        self::assertSame(' Avatars/User.PNG ', (new FilePath(' Avatars/User.PNG '))->value());
     }
 
     public function testConstructorIsNotPublic(): void
