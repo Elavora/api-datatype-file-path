@@ -76,6 +76,15 @@ A mensagem da excecao e `Valor invalido para Elavora\Api\DataTypes\Filesystem\Fi
 
 - `Elavora\Api\DataTypes\Filesystem\FilePath`
 
+## Documentação do tipo (OPTIONS)
+
+`FilePath` implementa `Elavora\Api\Framework\Contracts\DescribesType` e declara, via `documentedType()`, o que o
+OPTIONS público da API mostra para o campo:
+
+- `type`: `string`
+- `example`: `avatars/user.png`
+- `description`: caminho relativo com pastas separadas por `/`, sem começar com `/`, sem segmentos vazios, `.` ou `..`
+  (nomes de pasta não aceitam pontos); o arquivo segue as regras de `FileName`.
 ## Dependencias de runtime
 
 - PHP 8.4 ou superior
